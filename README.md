@@ -102,6 +102,9 @@ Before training any models split the data into X feature variables and y target 
   * The ClassificationReport has an accuarcy of 100% yet four of the hands are at or very near 0% so this accuarcy number is skewed.
   * There arent enough instances of the four hands predcited poorly for the model learn them
   * K-Nearest Neighbor struggles with large datasets, slower with a high number of features (curse of dimensionality), and doesn't handle complex patterns as well as other models.
+ 
+  ![K-Nearest Neighbor](https://github.com/user-attachments/assets/146279b5-225c-4f89-b6c0-7d87a07dc5bb)
+
 ---
 ## Neural Network
 * Encode the y varibale with LabelEncoder()
