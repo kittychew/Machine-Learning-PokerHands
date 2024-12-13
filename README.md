@@ -67,7 +67,7 @@ Before training any models split the data into X feature variables and y target 
   * The ClassificationReport has an accuarcy of 92% but only predicted 2 of the 10 hands well
   * RandomForest can easily overfit, especially with complex datasets like poker hands, leading to lower accuracy
 
-  ![Random Forest](https://github.com/user-attachments/assets/6c6af811-ce7d-4f01-ae29-88a7b94f3530)
+  ![Random2](https://github.com/user-attachments/assets/5fbaa98d-926a-4239-b82b-83f517f3e9db)
 
 ---
 ## Linear Regression
@@ -103,7 +103,7 @@ Before training any models split the data into X feature variables and y target 
   * There arent enough instances of the four hands predcited poorly for the model learn them
   * K-Nearest Neighbor struggles with large datasets, slower with a high number of features (curse of dimensionality), and doesn't handle complex patterns as well as other models.
  
-  ![K-Nearest Neighbor](https://github.com/user-attachments/assets/146279b5-225c-4f89-b6c0-7d87a07dc5bb)
+  ![Knearest2](https://github.com/user-attachments/assets/d8b94fb2-7893-407f-ac36-1d1f24c22cf4)
 
 ---
 ## Neural Network
@@ -133,7 +133,7 @@ model.fit(X_train, y_train, epochs=20, batch_size=32, validation_split=0.2, verb
   * The ClassificationReport has and accuarcy of 100%
   * The model was able to predict all but two hands very well giving the best results compared to the other models
 
-  ![Neural Network 1](https://github.com/user-attachments/assets/b353aebf-5f13-4bc1-9f21-21a6c818d205)
+  ![neural](https://github.com/user-attachments/assets/89943c55-99a8-40bd-bdfc-e11add1a43c4)
 
 ---
 # Optimizing our model
@@ -152,7 +152,7 @@ model = Sequential([
   ## Results 
   * The ClassificationReport still has an accuarchy of 100% but we see a drop in accuarcy for some hands
 
-  ![Neural Network 2](https://github.com/user-attachments/assets/f1bff0f7-9d0a-4fe1-b471-fd61570c4c8f)
+  ![neural2](https://github.com/user-attachments/assets/6ec810e1-d3f8-4b68-a749-c727367e23c7)
 
 ## Second Attempt
 * Return to only two layers and changing activation to Tanh 
@@ -167,7 +167,7 @@ model = Sequential([
   ## Results 
   * The ClassificationReport still has an accuarchy of 100% but once again we see a drop in accuarcy for some hands
 
-  ![Neural Network 3](https://github.com/user-attachments/assets/315b10bb-59ba-4e9c-9230-63607467357b)
+  ![neural3](https://github.com/user-attachments/assets/dc750d43-fd81-4b48-8ae9-3ebdcfb90edc)
 
 ---
 # Conclusion 
