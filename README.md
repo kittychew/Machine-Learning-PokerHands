@@ -99,7 +99,7 @@ Before training any models split the data into X feature variables and y target 
 * View accuarcy and efficiency using sklearns classification_report
 
   ## Results 
-  * The ClassificationReport has an accuarcy of 100% yet four of the hands are at or very near 0% so this accuarcy number is skewed.
+  * The ClassificationReport has an accuarcy of 50%.
   * There arent enough instances of the four hands predcited poorly for the model learn them
   * K-Nearest Neighbor struggles with large datasets, slower with a high number of features (curse of dimensionality), and doesn't handle complex patterns as well as other models.
  
