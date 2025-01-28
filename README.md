@@ -21,10 +21,10 @@ The class distribution in the dataset is balanced, with each class containing a 
 
 ## Group Members
 
-- **Hunter Becker** – Data Preprocessing, Model Evaluation, Performance Tuning, README
-- **Kat Chu** – Data Preprocessing, Model Evaluation, Presentation, README
-- **Oumar Diakite** – Model Implementation
-- **Mysee Lee** – Model Implementation
+- **Hunter Becker** – Data Preprocessing, Model Evaluation/Implementation, Performance Tuning, README
+- **Kat Chu** – Data Preprocessing, Model Evaluation/Implementation, Presentation, README
+- **Oumar Diakite** – Model Evaluation/Implementation
+- **Mysee Lee** – Model Evaluation/Implementation
 
 ## Objective
 
@@ -110,6 +110,37 @@ In this project, we experimented with several machine learning models to classif
      - Some categories, like "Royal Flush" and "Flush," still had minor prediction issues, though the accuracy for these categories was much higher than any of the other models tested.
 
    ![Neural Network Performance](https://github.com/user-attachments/assets/89943c55-99a8-40bd-bdfc-e11add1a43c4)
+
+### First Attempt: Adding a Third Hidden Layer
+
+Our first attempt at optimization involved adding a third hidden layer to the Neural Network. The model structure included 64 neurons in the first layer, 32 in the second layer, and 16 in the third hidden layer. The output layer used a softmax activation function for multiclass classification.
+
+```python
+model = Sequential([
+    Dense(64, input_dim=X_train.shape[1], activation='relu'),  # Input layer
+    Dense(32, activation='relu'),  # Hidden layer
+    Dense(16, activation='relu'),  # Additional hidden layer
+    Dense(y_onehot.shape[1], activation='softmax')  # Output layer with softmax for multiclass classification
+])
+```
+While the model architecture became more complex, there was no significant improvement in performance. The accuracy remained at 100%, but some poker hand categories, such as "Flush" and "Royal Flush," showed slight drops in prediction accuracy.
+
+### Second Attempt: Switching to Tanh Activation
+In our second attempt at optimization, we simplified the model back to two hidden layers and switched the activation function from ReLU to Tanh. This change aimed to provide smoother optimization and potentially improve generalization.
+
+```python
+model = Sequential([
+    Dense(64, input_dim=X_train.shape[1], activation='tanh'),  # Input layer
+    Dense(32, activation='tanh'),  # Hidden layer
+    Dense(y_onehot.shape[1], activation='softmax')  # Output layer with softmax for multiclass classification
+])
+```
+While this adjustment did not lead to significant improvements in accuracy, it did result in a smoother training process. The overall performance remained around 100% accuracy, but slight drops in certain hand types were still observed.
+
+### Results of Optimization Attempts
+The optimizations allowed us to experiment with different architectures, but the best-performing model maintained a 100% accuracy for most poker hands. However, there were minor drops in performance for certain poker hand categories, indicating areas where the model could still be improved for edge cases.
+
+We found that while further optimization could improve certain aspects, the Neural Network had already reached its peak performance with minimal changes.
 
 ### Conclusion
 - **Best Model**: The Neural Network was the standout model, achieving 100% accuracy for most poker hands.
