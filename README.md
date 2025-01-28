@@ -86,7 +86,7 @@ In this project, we experimented with several machine learning models to classif
    - **Challenges**:
      - While Random Forest performed well, it could still be improved in terms of fine-tuning hyperparameters and optimizing for better generalization.
 
-   ![Random Forest Performance](https://github.com/user-attachments/assets/random-forest-placeholder)
+    ![Random2](https://github.com/user-attachments/assets/5fbaa98d-926a-4239-b82b-83f517f3e9db)
 
 ### 4. **Neural Network**
    - **Steps**:
@@ -125,6 +125,8 @@ model = Sequential([
 ```
 While the model architecture became more complex, there was no significant improvement in performance. The accuracy remained at 100%, but some poker hand categories, such as "Flush" and "Royal Flush," showed slight drops in prediction accuracy.
 
+ ![neural2](https://github.com/user-attachments/assets/6ec810e1-d3f8-4b68-a749-c727367e23c7)
+
 ### Second Attempt: Switching to Tanh Activation
 In our second attempt at optimization, we simplified the model back to two hidden layers and switched the activation function from ReLU to Tanh. This change aimed to provide smoother optimization and potentially improve generalization.
 
@@ -136,6 +138,8 @@ model = Sequential([
 ])
 ```
 While this adjustment did not lead to significant improvements in accuracy, it did result in a smoother training process. The overall performance remained around 100% accuracy, but slight drops in certain hand types were still observed.
+
+  ![neural3](https://github.com/user-attachments/assets/dc750d43-fd81-4b48-8ae9-3ebdcfb90edc)
 
 ### Results of Optimization Attempts
 The optimizations allowed us to experiment with different architectures, but the best-performing model maintained a 100% accuracy for most poker hands. However, there were minor drops in performance for certain poker hand categories, indicating areas where the model could still be improved for edge cases.
