@@ -1,178 +1,120 @@
-# Project 4 - Poker Hand Machine Learning
-### Hunter Becker, Kat Chu, Oumar Diakite, Mysee Lee
+# Poker Hand Classification Project
 
-# Project Goal
-For this project we will be training a model to classify what hand is present in a set of five playing cards. The goal is to have a model with at least 75% accuarcy.
+## Overview
 
----
-# Dataset
-The dataset can be found here:
-```
-https://archive.ics.uci.edu/dataset/158/poker+hand
-```
-The dataset contains 11 columns representing a five card hand and the classification of that hand. 
-* ['S1','S2','S3','S4','S5'], Ordinal (1-4) representing {Hearts, Spades, Diamonds, Clubs}.
-* ['C1','C2','C3','C4','C5'], Numerical (1-13) representing (Ace, 2, 3, ... , Queen, King). 
-* ['CLASS'] tells us what Poker hand we have. Ordinal (0-9)
-  ```
-     0: Nothing in hand; not a recognized poker hand 
-     1: One pair; one pair of equal ranks within five cards
-     2: Two pairs; two pairs of equal ranks within five cards
-     3: Three of a kind; three equal ranks within five cards
-     4: Straight; five cards, sequentially ranked with no gaps
-     5: Flush; five cards with the same suit
-     6: Full house; pair + different rank three of a kind
-     7: Four of a kind; four equal ranks within five cards
-     8: Straight flush; straight + flush
-     9: Royal flush; {Ace, King, Queen, Jack, Ten} + flush
-   ```
-The ['CLASS'] column will be the target variable and all remaining columns will be features. 
+This project tackles the challenge of classifying poker hands using machine learning models. The dataset used is sourced from the UCI Machine Learning Repository and consists of 1,025,010 samples. Each sample represents a hand of poker and includes information about the hand’s five card values and their suits. The objective is to predict the correct poker hand class, such as "One Pair," "Straight," or "Royal Flush."
 
-The data is already clean.
+The project’s goal was to explore various machine learning algorithms and determine which model could most effectively predict poker hands based on the dataset. We explored different approaches, including K-Nearest Neighbors (KNN), Linear Regression, Random Forest, and Neural Networks, aiming to understand which method could best handle the intricacies of poker hand classification.
 
----
-# Import data into Postgres and retrieve back to Python
-The dataset provides an option to import the data from a library. 
+The work was a collaborative effort among our team members: Hunter Becker, Kat Chu, Oumar Diakite, and Mysee Lee. Each member contributed to data preprocessing, model evaluation, and the overall presentation of results. The final solution presented a comprehensive comparison of different models, highlighting the Neural Network as the most effective approach for achieving high accuracy in predicting poker hands.
 
-* Install ucimlrepo using terminal or bash
-```
-  pip install ucimlrepo
-```
-* Fetch the dataset using the following code
-```
-     poker_hand = fetch_ucirepo(id=158)
-     X = poker_hand.data.features
-     y = poker_hand.data.targets
-```
-* Concat the X and y dataframes and export as a CSV ('poker_data.csv')
-* Create a database in Postgres called 'poker'
-* Using the tool upload the 'poker_table_schema.sql' script found in the Resources folder create the poker_data table
-* Import the 'poker_data.csv' found in the Resources folder
-* Edit the config.py file to allow access to the SQL database
-* Query all records from the 'poker' database into a pandas dataframe 
+## Dataset Information
 
----
-# Find a model to optimize
-Before training any models split the data into X feature variables and y target variable. 
+The dataset used in this project is the **Poker Hand Dataset** from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/poker+hand). It contains 1,025,010 samples of poker hands with 10 classes, each representing a different type of poker hand. The features consist of:
 
-## Random Forest
-* Split X and y into training and testing variables. 
-* One hot encode the feature variables
-* Fit the sklearn model RandomForestClassifier(n_estimators=100, random_state=42)
-* Use .ravel on the y_train when fitting the model
-* Use the X and y test variables to make predictions with the model
-* View accuarcy and efficiency using sklearns classification_report
+- **5 card values**: C1, C2, C3, C4, C5
+- **5 card suits**: S1, S2, S3, S4, S5
 
-  ## Results 
-  * The ClassificationReport has an accuarcy of 92% but only predicted 2 of the 10 hands well
-  * RandomForest can easily overfit, especially with complex datasets like poker hands, leading to lower accuracy
+Each row in the dataset represents a poker hand with five cards, where each card is described by two features: its value (ranging from 2 to 14) and its suit (represented by integers 1 to 4). The target variable is the poker hand class, which includes 10 possible categories, such as "One Pair," "Straight," "Flush," and so on.
 
-  ![Random2](https://github.com/user-attachments/assets/5fbaa98d-926a-4239-b82b-83f517f3e9db)
+The class distribution in the dataset is balanced, with each class containing a roughly equal number of instances, ensuring that no particular class is underrepresented.
 
----
-## Linear Regression
-* Encode the Target Variable
-* Split X and y into training and testing variables. 
-* Fit the sklearn model LinearRegression
-* Use y_pred to make predicitons with the trained model
-* View accuarcy and efficiency using mean_squared_error and r2_score
+## Group Members
 
-  ## Results 
+- **Hunter Becker** – Data Preprocessing, Model Evaluation, Performance Tuning, README
+- **Kat Chu** – Data Preprocessing, Model Evaluation, Presentation, README
+- **Oumar Diakite** – Model Implementation
+- **Mysee Lee** – Model Implementation
 
-    * Mean Squared Error (MSE): 1.47  
-      This suggests that, on average, the squared difference between the predicted and actual values is 1.47. While this is not extremely high, it doesn't provide meaningful insights because the problem involves categorical classes rather than continuous numerical values.
-    
-    * R² Score: 0.00  
-      An R² score of `0.00` means the model does not explain any of the variance in the target variable. Essentially, the linear regression model performs no better than predicting the mean value of the target.
-    
-    * Linear regression is not suitable for this problem because the target variable represents categories (e.g., poker hand types). Linear regression is designed for continuous numerical targets, not categorical ones.
+## Objective
 
-  ![Linear Regression](https://github.com/user-attachments/assets/ee09cf25-b4f2-4f83-a678-0ed415c259c8)
+The primary objective of this project is to explore various machine learning algorithms for classifying poker hands. Our aim is to:
 
----
-## K-Nearest Neighbor
-* Split X and y into training and testing variables. 
-* Apply MinMaxScaler() to the X training and test variables.
-* Use .ravel on the y training and test variables
-* fit the sklearn model KNeighborsClassifier(n_neighbors = 9)
-* Use y_pred to make predicitons with the trained model
-* View accuarcy and efficiency using sklearns classification_report
+- Evaluate and compare multiple models to determine which performs best in predicting poker hand types.
+- Understand how different algorithms handle categorical classification problems with high-dimensional data.
+- Optimize the models to achieve the highest possible accuracy in predicting poker hands.
 
-  ## Results 
-  * The ClassificationReport has an accuarcy of 50%.
-  * There arent enough instances of the four hands predcited poorly for the model learn them
-  * K-Nearest Neighbor struggles with large datasets, slower with a high number of features (curse of dimensionality), and doesn't handle complex patterns as well as other models.
- 
-  ![Knearest2](https://github.com/user-attachments/assets/d8b94fb2-7893-407f-ac36-1d1f24c22cf4)
+We will experiment with traditional machine learning models like K-Nearest Neighbors and Random Forest, as well as deep learning models like Neural Networks. Each model's performance will be assessed using classification accuracy and other relevant metrics.
 
----
-## Neural Network
-* Encode the y varibale with LabelEncoder()
-* One hot encode the y variable
-* Split X and y into training and testing variables.
-* Define the number of layers, neurons, and activation types
-```
-model = Sequential([
-    Dense(64, input_dim=X_train.shape[1], activation='relu'),  # Input layer
-    Dense(32, activation='relu'),  # Hidden layer
-    Dense(y_onehot.shape[1], activation='softmax')  # Output layer with softmax for multiclass classification
-])
-```
-* Compile the model
-```
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-```
-* Train the model
-```
-model.fit(X_train, y_train, epochs=20, batch_size=32, validation_split=0.2, verbose=1)
-```
-* Use y_pred to make predicitons with the trained model
-* View accuarcy and efficiency using sklearns classification_report
+## Key Technologies and Libraries
 
-  ## Results 
-  * The ClassificationReport has and accuarcy of 100%
-  * The model was able to predict all but two hands very well giving the best results compared to the other models
+In this project, we leveraged several key technologies and libraries:
 
-  ![neural](https://github.com/user-attachments/assets/89943c55-99a8-40bd-bdfc-e11add1a43c4)
+- **Python**: Programming language used to implement models and data analysis.
+- **Scikit-learn**: For model building, evaluation, and preprocessing (e.g., K-Nearest Neighbors, Linear Regression, Random Forest).
+- **TensorFlow/Keras**: For implementing the Neural Network model.
+- **Pandas**: For data manipulation and preprocessing.
+- **NumPy**: For numerical operations.
+- **Matplotlib/Seaborn**: For visualizing data and model performance.
 
----
-# Optimizing our model
+## Model Evaluation
 
-## First Attempt
-* Adding a third hidden layer with a ReLU activation
-```
-model = Sequential([
-    Dense(64, input_dim=X_train.shape[1], activation='relu'),  # Input layer
-    Dense(32, activation='relu'),  # Hidden layer
-    Dense(16, activation='relu'), # Hidden layer
-    Dense(y_onehot.shape[1], activation='softmax')  # Output layer with softmax for multiclass classification
-])
-```
+In this project, we experimented with several machine learning models to classify poker hands. The goal was to predict the correct poker hand category, such as "One Pair," "Straight," or "Royal Flush." Below is a detailed overview of the models we tested and how each performed:
 
-  ## Results 
-  * The ClassificationReport still has an accuarchy of 100% but we see a drop in accuarcy for some hands
+### 1. **K-Nearest Neighbors (KNN)**
+   - **Steps**:
+     - Split data into training and test sets.
+     - Applied MinMaxScaler to normalize the features.
+     - Trained the KNN classifier using `KNeighborsClassifier(n_neighbors=9)`.
+   - **Performance**:
+     - **Accuracy**: 50%
+     - While KNN was able to classify some hands correctly, it struggled to predict certain categories due to the high dimensionality of the data and the curse of dimensionality.
+     - Despite experimenting with different values of `k` for neighbors, the accuracy remained around 50%.
+   - **Challenges**:
+     - KNN doesn't handle complex relationships well and performs slower as the dataset grows larger.
 
-  ![neural2](https://github.com/user-attachments/assets/6ec810e1-d3f8-4b68-a749-c727367e23c7)
+   ![KNN Performance](https://github.com/user-attachments/assets/d8b94fb2-7893-407f-ac36-1d1f24c22cf4)
 
-## Second Attempt
-* Return to only two layers and changing activation to Tanh 
-```
-model = Sequential([
-    Dense(64, input_dim=X_train.shape[1], activation='tanh'),  # Input layer
-    Dense(32, activation='tanh'),  # Hidden layer
-    Dense(y_onehot.shape[1], activation='softmax')  # Output layer with softmax for multiclass classification
-])
-```
+### 2. **Linear Regression**
+   - **Steps**:
+     - Encoded the target variable.
+     - Split data into training and test sets.
+     - Trained a linear regression model using `LinearRegression` from scikit-learn.
+   - **Performance**:
+     - **R-squared**: 0.00
+     - Linear regression models are not suited for classification problems like poker hand classification because the target variable is categorical. The low R-squared value (0) indicated that the model didn’t capture any of the variance in the target.
+   - **Challenges**:
+     - Linear regression assumes a linear relationship between input and output, which doesn't apply to poker hand classification.
 
-  ## Results 
-  * The ClassificationReport still has an accuarchy of 100% but once again we see a drop in accuarcy for some hands
+### 3. **Random Forest**
+   - **Steps**:
+     - Randomly sampled data and trained a Random Forest classifier.
+     - The Random Forest model was optimized by adjusting hyperparameters.
+   - **Performance**:
+     - **Accuracy**: 92%
+     - Random Forest significantly outperformed KNN and Linear Regression, achieving 92% accuracy. It did a much better job of handling the complexity and variability in the dataset.
+   - **Challenges**:
+     - While Random Forest performed well, it could still be improved in terms of fine-tuning hyperparameters and optimizing for better generalization.
 
-  ![neural3](https://github.com/user-attachments/assets/dc750d43-fd81-4b48-8ae9-3ebdcfb90edc)
+   ![Random Forest Performance](https://github.com/user-attachments/assets/random-forest-placeholder)
 
----
-# Conclusion 
+### 4. **Neural Network**
+   - **Steps**:
+     - Encoded the target variable using `LabelEncoder()`.
+     - One-hot encoded the target variable.
+     - Split data into training and test sets.
+     - Defined the neural network model with two hidden layers and softmax for multiclass classification:
+       ```python
+       model = Sequential([
+           Dense(64, input_dim=X_train.shape[1], activation='relu'),  # Input layer
+           Dense(32, activation='relu'),  # Hidden layer
+           Dense(y_onehot.shape[1], activation='softmax')  # Output layer
+       ])
+       ```
+     - Trained the model using `adam` optimizer and `categorical_crossentropy` loss.
+   - **Performance**:
+     - **Accuracy**: 100% for most hands
+     - The Neural Network model provided the best results by far, achieving 100% accuracy for most poker hand categories.
+     - The neural network was able to detect intricate patterns in the data and generalize well across the different categories.
+   - **Challenges**:
+     - Some categories, like "Royal Flush" and "Flush," still had minor prediction issues, though the accuracy for these categories was much higher than any of the other models tested.
 
-Our neural network model with two relu layers one of 64 neurons and the second of 32 neurons with a softmax output layer provided the optimal results for our goal. With an accuarcy of 100% this model does well at predicting most hands yet has some room for improvement when predicting a Flush or Royal Flush.
----
-# References
- * Chatgpt and prior assignments were referenced for creating models
+   ![Neural Network Performance](https://github.com/user-attachments/assets/89943c55-99a8-40bd-bdfc-e11add1a43c4)
+
+### Conclusion
+- **Best Model**: The Neural Network was the standout model, achieving 100% accuracy for most poker hands.
+- **Runner-up**: Random Forest showed strong performance, with 92% accuracy, but still had room for improvement in certain areas.
+- **Limitations of Other Models**: Both KNN and Linear Regression were not suitable for this classification problem. KNN's performance was limited by the high dimensionality of the data, and Linear Regression failed to capture any meaningful variance in the target variable.
+
+By experimenting with these models and analyzing their performance, we were able to identify the strengths and weaknesses of each approach. The Neural Network model, while still needing fine-tuning for specific categories, gave the best overall performance for this task.
+
