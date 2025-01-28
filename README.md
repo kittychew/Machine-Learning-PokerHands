@@ -1,5 +1,4 @@
-# Poker Hand Classification Project
-
+# Poker Hand Classification Using Machine Learning
 ## Overview
 
 This project tackles the challenge of classifying poker hands using machine learning models. The dataset used is sourced from the UCI Machine Learning Repository and consists of 1,025,010 samples. Each sample represents a hand of poker and includes information about the hand’s five card values and their suits. The objective is to predict the correct poker hand class, such as "One Pair," "Straight," or "Royal Flush."
