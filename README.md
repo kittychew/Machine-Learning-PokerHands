@@ -63,7 +63,7 @@ In this project, we experimented with several machine learning models to classif
    - **Challenges**:
      - KNN doesn't handle complex relationships well and performs slower as the dataset grows larger.
 
-   ![KNN Performance](https://github.com/user-attachments/assets/d8b94fb2-7893-407f-ac36-1d1f24c22cf4)
+     ![Knearest2](https://github.com/user-attachments/assets/d8b94fb2-7893-407f-ac36-1d1f24c22cf4)
 
 ### 2. **Linear Regression**
    - **Steps**:
@@ -76,6 +76,8 @@ In this project, we experimented with several machine learning models to classif
    - **Challenges**:
      - Linear regression assumes a linear relationship between input and output, which doesn't apply to poker hand classification.
 
+ ![Linear Regression](https://github.com/user-attachments/assets/ee09cf25-b4f2-4f83-a678-0ed415c259c8)
+
 ### 3. **Random Forest**
    - **Steps**:
      - Randomly sampled data and trained a Random Forest classifier.
@@ -86,7 +88,7 @@ In this project, we experimented with several machine learning models to classif
    - **Challenges**:
      - While Random Forest performed well, it could still be improved in terms of fine-tuning hyperparameters and optimizing for better generalization.
 
-    ![Random2](https://github.com/user-attachments/assets/5fbaa98d-926a-4239-b82b-83f517f3e9db)
+  ![Random2](https://github.com/user-attachments/assets/5fbaa98d-926a-4239-b82b-83f517f3e9db)
 
 ### 4. **Neural Network**
    - **Steps**:
